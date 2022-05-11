@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	<div class="container">
+	<div class="row">
+	<div class="col-md-8 offset-md-3">
+	<div class="card">
+	<div class="card-body">
+	<h1 class="text-center">Add Contact Here...!!</h1>
+	<div class="container text-center">
+	<div class="alert" th:if="${session.message}" th:classappend="${session.message.type}" role="alert">
+ 	<p th:text="${session.message.content}"></p>
+ 	<th:block th:text="${#session.removeAttribute(message)}"></th:block>
+	</div>
+	</div>
+	<form th:action="@{/user/proccess_addcontact}" method="post" th:object="${contact}" enctype="multipart/form-data">
+		
+		<div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Enter name</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-file-signature"></i></div>
+        </div>
+        <input type="text" th:value="${contact.name}" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" name="name" required class="form-control" id="inlineFormInputGroup" placeholder="Enter name">
+     
+      <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+       
+      </div>
+     
+      </div>
+    </div>
+	
+		<div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Enter nickname</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-file-signature"></i></div>
+        </div>
+        <input type="text" th:value="${contact.nickName}" name="nickName" th:classappend="${#fields.hasErrors('nickName')?'is-invalid':''}" required class="form-control" id="inlineFormInputGroup" placeholder="Enter nickname">
+      <div class="invalid-feedback" th:each="e : ${#fields.errors('nickName')}" th:text="${e}">
+      
+      </div>
+      </div>
+    </div>
+    
+    	<div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Enter email</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-at"></i></div>
+        </div>
+        <input type="email" th:value="${contact.email}" th:classappend="${#fields.hasErrors('email')?'is-invalid':''}" name="email" required class="form-control" id="inlineFormInputGroup" placeholder="Enter email">
+      <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}">
+        
+      </div>
+      </div>
+    </div>
+    
+    	<div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Enter phone</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-phone-square-alt"></i></div>
+        </div>
+        <input type="text" name="phone" th:value="${contact.phone}" th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}" required class="form-control" id="inlineFormInputGroup" placeholder="Enter phone">
+       <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">
+      
+      </div>
+      </div>
+    </div>
+    
+	<div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Enter work</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-briefcase"></i></div>
+        </div>
+        <input type="text" name="work" th:classappend="${#fields.hasErrors('work')?'is-invalid':''}" th:value="${contact.work}" required class="form-control" id="inlineFormInputGroup" placeholder="Enter work">
+      <div class="invalid-feedback" th:each="e : ${#fields.errors('work')}" th:text="${e}">
+      
+      </div>
+      </div>
+    </div>
+    
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Tell us something about you..</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-info-circle"></i></div>
+        </div>
+        <textarea  name="about"  class="form-control" id="mytextarea" placeholder="Tell us something about you.." rows="6"></textarea>
+      </div>
+    </div>
+    	
+    	<div class="form-group">
+    <label for="exampleFormControlFile1">select your image for upload...</label>
+    <input type="file" name="profileImage" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+    	<button type="submit" class="btn bg-primary btn-block">Add Contact</button>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+<script>
+  $(document).ready(()=>{
+    $(".items").removeClass(".active");
+    $("#contact-link").addClass(".active");
+  })
+</script>
+	</section>
+</body>
+</html>

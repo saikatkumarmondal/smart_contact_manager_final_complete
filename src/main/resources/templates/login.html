@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	 <div id="login">
+       
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" th:action="@{/do_login}" method="post">
+                        <div class="container text-center">
+                        <div class="alert alert-danger" th:if="${param.error}" role="alert">
+  					<p>something went wrong</p>
+					</div>
+					
+					<div class="alert alert-primary" th:if="${param.logout}" role="alert">
+ 				<p>successfully loggedout</p>
+				</div>
+				
+					<div class="alert alert-success" th:if="${param.change}" role="alert">
+ 				<p th:text="${param.change}"></p>
+				</div>
+                        </div>
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Email:</label><br>
+                                <input type="email" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <div id="register-link" class="text-right my-2">
+                                <a th:href="@{/signup}" class="text-info">Register here</a>
+                          
+                           
+                            </div>
+                             <div class="container text-center m-3">
+                            <a th:href="@{/forgot}">forgot password</a>
+                          
+                           
+                            </div>
+                               <div class="container">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                               </div>
+                            </div>
+                           
+                            
+                            
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	</section>
+</body>
+</html>

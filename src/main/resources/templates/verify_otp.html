@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	<div class="container">
+	<div class="row">
+	<div class="col-md-6 offset-md-4">
+	<div class="card">
+	<div class="alert alert-primary" role="alert">
+  We have sent OTP to your email....
+	</div>
+	
+	<div class="card-body">
+	
+	<form th:action="@{/verify-otp}" method="post">
+	<div class="form-group">
+	<input type="text" name="otp" class="form-control" required="required" placeholder="Enter OTP" />
+	</div>
+	<div class="container text-center">
+	<button type="submit" class="btn btn-warning">Verify OTP</button>
+	</div>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+</body>
+</html>

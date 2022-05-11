@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	<div class="container text-center">
+	<div class="search-content">
+	<input type="text" onkeyup="search()" class="form-control" placeholder="search here by name"  id="search-input"/>
+	<div class="search-result">
+	<h1>Search Result</h1>
+	</div>
+	</div>
+	<div class="table-responsive">
+	
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each=" c:${contact}">
+      <th scope="row"><span th:text="'SCM'+${c.cId}"></span></th>
+      <td>
+      <span th:text="${c.name}"></span>
+      <img th:src="@{'/img/'+${c.image}}" width="50" height="50" alt="" />
+      </td>
+      <td>
+      <a th:href="@{'/user/'+${c.cId}+'/contact/'}">
+      <span th:text="${c.email}"></span>
+      </a>
+      </td>
+      <td><span th:text="${c.phone}"></span></td>
+       <td>
+       <a th:href="@{'/user/update/'+${c.cId}}" class="btn btn-success btn-sm">update</a>
+        <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">delete</a>
+       </td>
+    </tr>
+   
+  </tbody>
+</table>
+	
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li th:if="${currentPage!=0}" class="page-item"><a class="page-link" th:href="@{'/user/show_contact/'+${currentPage-1}}">Previous</a></li>
+    
+    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" th:href="@{'/user/show_contact/'+${i-1}}"><span th:text="${i}"></span></a></li>
+    
+    <li th:if="${currentPage+1!=totalPages}" class="page-item"><a class="page-link" th:href="@{'/user/show_contact/'+${currentPage+1}}">Next</a></li>
+  </ul>
+</nav>
+	</div>
+	
+	</div>
+	<script>
+		$(document).ready(()=>{
+			$('.items').removeClass('active');
+			$('#view-link').addClass('active');
+		})
+	</script>
+	
+	</section>
+</body>
+</html>
